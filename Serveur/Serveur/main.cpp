@@ -50,7 +50,7 @@ int main(int argc,  char* argv[])
         }
 
 
-        //transmition des position avec sendto()
+        //transmission des position avec sendto()
 
 
     }
