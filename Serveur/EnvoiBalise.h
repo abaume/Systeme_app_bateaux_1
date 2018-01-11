@@ -2,12 +2,11 @@
 #define ENVOI_DON_H
 
 #include <string>
+using namespace std;
 
 class EnvoiBalise
 {
-  static const int TAILLE_MAX = 10;
-  char m_id[TAILLE_MAX];  // tableau de caractères
-  int m_x;
+  string m_id;
   int m_y;
   int m_cap;
 
@@ -17,7 +16,7 @@ class EnvoiBalise
   EnvoiBalise (const std::string & id, int x, int y, int cap);
 
   // accesseurs
-  std::string   nom()     const;
+  std::string   id()     const;
   int  x() const;
   int  y() const;
   int  cap() const;

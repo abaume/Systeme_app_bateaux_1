@@ -9,3 +9,7 @@ SOURCES += main.cpp
 include(deployment.pri)
 qtcAddDeployment()
 
+HEADERS += \
+    EnvoiBalise.h \
+    make-sockaddr.h
+

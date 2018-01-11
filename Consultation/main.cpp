@@ -17,6 +17,8 @@ int main(int argc,  char* argv[])
 //-family définit la famille du socket. Les valeurs principales sont AF_INET pour un socket IPv4, AF_INET6 pour un support IPv6.
 //-type spécifie le type de socket. Les valeurs principales utilisées sont SOCK_STREAM pour TCP, SOCK_DGRAM pour UDP.
 //-protocol définit le protocole à utiliser. Il sera dépendant du type de socket et de sa famille. Les valeurs principales sont IPPROTO_TCP pour un socket TCP, IPPROTO_UDP pour un socket UDP.
+
+  int connect(int sockfd, struct sockaddr *serv_addr, socklen_t addrlen);
   int fd = socket(AF_INET,     SOCK_STREAM, IPPROTO_TCP);
   serveur m;
 

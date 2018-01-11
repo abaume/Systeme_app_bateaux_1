@@ -23,6 +23,7 @@ int main(int argc,  char* argv[])
   int identifiant;
   int x, y;
   char cap;
+  int l = listen(int s, int backlog);
   //connexion
   auto adresse_consultation = remote_socket_address("localhost", SOCK_DGRAM, argv[2]);
 
@@ -41,4 +42,12 @@ int main(int argc,  char* argv[])
       close (fd);
 
   }
+}
+
+if (read(fd, &m, sizeof m) == sizeof m) {
+    // on récupère le montant envoyé par le client
+    unsigned int identifiant = m.identifiant();
+    unsigned int x = m.x();
+    unsigned int y = m.y();
+    unsigned char cap = m.cap();
 }
