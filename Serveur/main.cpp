@@ -14,14 +14,21 @@ int main(int argc,  char* argv[])
         std::cerr << "Usage: " << argv[0] << " port" << std::endl;
         return EXIT_FAILURE;
     }
+
+
+
+    //en deux thread client et balise
+
+
+
+    map<string,EnvoiBalise> listeBalise;
+    struct sockaddr_in information_sur_la_source;
+
     // on définit l’adresse locale
     auto adresse_locale = local_socket_address(SOCK_DGRAM, argv[1]);
     int socket_UDP = socket(AF_INET, SOCK_DGRAM, 0);
     bind(socket_UDP, (sockaddr *) & adresse_locale, sizeof(adresse_locale));
 
-    map<string,EnvoiBalise> listeBalise1;
-    map<string,EnvoiBalise> listeBalise2;
-    map<string,EnvoiBalise> listeBalise3;
 
     //lancement du serveur
     while (true) {
@@ -31,36 +38,31 @@ int main(int argc,  char* argv[])
         //si recois messages de balise
         if (read(socket_UDP, &message, sizeof message) == sizeof message) {
             //sauvegarde de la nouvelle coordonnées GPS
-            EnvoiBalise identifiant = message.id();
+            listeBalise[message.id()]= message;
         }
-        switch (identifiant)
-        {
-        case "1":
-            listeBalise1.insert(message.id(),message.x(),message.y(),message.cap());
-            break;
-        case "2":
-            listeBalise2.insert(message.id(),message.x(),message.y(),message.cap());
-            break;
-        case "3":
-            listeBalise3.insert(message.id(),message.x(),message.y(),message.cap());
-            break;
-        }
+
+        std::cout << "** Serveur Balises UDP port " << argv[1] << std::endl;
+
+
+
+
+
 
 
         //  ECOUTE ET ENVOIE CLIENT en TCP
         int socket_TCP = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
         bind(socket_TCP, (sockaddr *) & adresse_locale, sizeof(adresse_locale));
-        //      std::cout << "** Serveur Client TCP port " << argv[1] << std::endl;
-        //      std::cout << "** Serveur Balises UDP port " << argv[1] << std::endl;
+              std::cout << "** Serveur Client TCP port " << argv[1] << std::endl;
 
         //écoute
-        if (listen(socket_TCP, 0) = 0){
+        if (listen(socket_TCP, 0) == 0){
             //acceptation de la connection
-            id_de_la_nouvelle_socket=accept(id_de_la_socket,(struct sockaddr*)&information_sur_la_source,&tempo);
-            if(id_de_la_nouvelle_socket==INVALID_SOCKET)
-                printf("\nDesole, je ne peux pas accepter la session TCP du a l'erreur : %d",WSAGetLastError());
+            socklen_t tempo = sizeof(information_sur_la_source);
+            int id_de_la_nouvelle_socket=accept(socket_TCP,(struct sockaddr*)&information_sur_la_source,&tempo);
+            if(id_de_la_nouvelle_socket<0)
+                cout << "Desole, je ne peux pas accepter la session TCP" << endl;
             else
-                printf("\naccept      : OK");
+                cout << "naccept      : OK" << endl;
             //CONNECTE !!!
 
             //ENVOIS DES DONNEES
@@ -69,32 +71,15 @@ int main(int argc,  char* argv[])
 
             //envoyer la liste de Bateau
 
-            int n = sendto(socket_TCP, &listeBalise1, sizeof listeBalise1,
+            int n = sendto(socket_TCP, &listeBalise, sizeof listeBalise,
                            0,
                            (sockaddr *) &adresse_consultation, sizeof adresse_consultation);
-            if (n == sizeof listeBalise1) {
-                std::cout << "Envoi à consultation de la Balise 1" << std::endl;
+            if (n == sizeof listeBalise) {
+                std::cout << "Envoi à consultation de la Balise" << std::endl;
             } else {
-                std::cout << "Il y a un problème d'envoi pour Balise 1" << std::endl;
+                std::cout << "Il y a un problème d'envoi pour Balise" << std::endl;
             }
 
-            n = sendto(socket_TCP, &listeBalise2, sizeof listeBalise2,
-                           0,
-                           (sockaddr *) &adresse_consultation, sizeof adresse_consultation);
-            if (n == sizeof listeBalise2) {
-                std::cout << "Envoi à consultation de la Balise 2" << std::endl;
-            } else {
-                std::cout << "Il y a un problème d'envoi pour Balise 2" << std::endl;
-            }
-
-            n = sendto(socket_TCP, &listeBalise3, sizeof listeBalise3,
-                           0,
-                           (sockaddr *) &adresse_consultation, sizeof adresse_consultation);
-            if (n == sizeof listeBalise3) {
-                std::cout << "Envoi à consultation de la Balise 3" << std::endl;
-            } else {
-                std::cout << "Il y a un problème d'envoi pour Balise 3" << std::endl;
-            }
             close (socket_TCP);
             //END IF
         }

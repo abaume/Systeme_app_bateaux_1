@@ -4,7 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    EnvoiBalise.cc \
+    make-sockaddr.cc
 
 include(deployment.pri)
 qtcAddDeployment()
