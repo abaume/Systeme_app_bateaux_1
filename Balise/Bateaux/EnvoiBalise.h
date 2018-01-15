@@ -1,5 +1,5 @@
-#ifndef ENVOI_DON_H
-#define ENVOI_DON_H
+#ifndef ENVOI_BALISE_H
+#define ENVOI_BALISE_H
 
 #include <string>
 
