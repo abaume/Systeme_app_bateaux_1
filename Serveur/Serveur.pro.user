@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.2.1, 2018-01-15T16:59:00. -->
+<!-- Written by QtCreator 3.2.1, 2018-01-15T18:09:44. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -237,7 +237,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Serveur</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Serveur2</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/mnt/roon/users/rlapicardise/Systeme/Ramet/Projet/Systeme_app_bateaux_1/Serveur/Serveur.pro</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">8000 7070</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">8080 7070</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">Serveur.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseTerminal">true</value>

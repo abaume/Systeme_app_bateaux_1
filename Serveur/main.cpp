@@ -13,16 +13,17 @@ using namespace std;
 map<string,EnvoiBalise> listeBalise;
 struct sockaddr_in information_sur_la_source;
 
-void reception(char* argv){
+void reception(std::string port){
 
     // on définit l’adresse locale
-    auto adresse_locale = local_socket_address(SOCK_DGRAM, argv);
+    auto adresse_locale = local_socket_address(SOCK_DGRAM, port);
+
     int socket_UDP = socket(AF_INET, SOCK_DGRAM, 0);
     bind(socket_UDP, (sockaddr *) & adresse_locale, sizeof(adresse_locale));
 
     //lancement du serveur
     while (true) {
-        std::cout << "** Serveur Balises UDP port " << argv << std::endl << std::endl;
+        std::cout << "** Serveur Balises UDP port " << port << std::endl << std::endl;
         EnvoiBalise message;
         //BALISES en UDP
         // reception des coordonées GPS et enregistrement
@@ -32,7 +33,6 @@ void reception(char* argv){
             listeBalise[message.id()]= message;
             std::cout << "** Serveur Balises UDP a receptionné le message de" << message.id() << std::endl;
         }
-
     }
 }
 
@@ -62,13 +62,17 @@ void envoi(char* argv){
 
         //envoyer la liste de Bateau
 
-        int n = sendto(socket_TCP, &listeBalise, sizeof listeBalise,
-                       0,
-                       (sockaddr *) &adresse_consultation, sizeof adresse_consultation);
-        if (n == sizeof listeBalise) {
-            std::cout << "Envoi à consultation de la Balise" << std::endl;
-        } else {
-            std::cout << "Il y a un problème d'envoi pour Balise" << std::endl;
+        for(auto x : listeBalise){
+
+            int n = sendto(socket_TCP, &x, sizeof x,
+                           0,
+                           (sockaddr *) &adresse_consultation, sizeof adresse_consultation);
+            if (n == sizeof x) {
+                std::cout << "Envoi à consultation de la Balise" << std::endl;
+            } else {
+                std::cout << "Il y a un problème d'envoi pour Balise" << std::endl;
+            }
+
         }
 
         close (socket_TCP);

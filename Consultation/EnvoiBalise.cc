@@ -1,4 +1,6 @@
 #include "EnvoiBalise.h"
+#include <arpa/inet.h>
+#include <cstring>
 
 EnvoiBalise::EnvoiBalise (const std::string & id, int x, int y, int cap)
   : m_x {x},
@@ -8,7 +10,7 @@ EnvoiBalise::EnvoiBalise (const std::string & id, int x, int y, int cap)
     strncpy(m_id, id.c_str(), TAILLE_MAX);
   }
 
-std::string EnvoiBalise::id() {
+std::string EnvoiBalise::id() const {
   return { m_id };
 }
 
