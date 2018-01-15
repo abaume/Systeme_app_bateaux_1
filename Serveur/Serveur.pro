@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
+CONFIG += thread
 SOURCES += main.cpp \
     EnvoiBalise.cc \
     make-sockaddr.cc
