@@ -31,14 +31,14 @@ void reception(std::string port){
         if (read(socket_UDP, &message, sizeof message) == sizeof message) {
             //sauvegarde de la nouvelle coordonnées GPS
             listeBalise[message.id()]= message;
-            std::cout << "** Serveur Balises UDP a receptionné le message de" << message.id() << std::endl;
+            std::cout << "** Serveur Balises UDP a receptionné le message de " << message.id() << " en position " << message.x() << " " << message.y() << " et en cap " << message.cap() << std::endl;
         }
     }
 }
 
 void envoi(char* argv){
 
-    auto adresse_locale = local_socket_address(SOCK_DGRAM, argv);
+    auto adresse_locale = local_socket_address(SOCK_STREAM, argv);
 
     //  ECOUTE ET ENVOIE CLIENT en TCP
     int socket_TCP = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);

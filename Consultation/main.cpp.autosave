@@ -24,7 +24,6 @@ int main(int argc,  char* argv[])
 
         std::cout << "** connection en cours..." << std::endl << std::endl;
         int connect(int sockfd, struct sockaddr *adresse_serveur, socklen_t addrlen);
-        std::cout << "** connyrfk cours..." << std::endl << std::endl;
         int sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
         vector<EnvoiBalise> liste_bateaux;

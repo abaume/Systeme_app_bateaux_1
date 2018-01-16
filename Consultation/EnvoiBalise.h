@@ -1,15 +1,14 @@
-#ifndef ENVOI_DON_H
-#define ENVOI_DON_H
+#ifndef ENVOI_BALISE_H
+#define ENVOI_BALISE_H
 
-using namespace std;
-
-#include <cstring>
 #include <string>
+#include <arpa/inet.h>
+#include <cstring>
 
 class EnvoiBalise
 {
-  static const int TAILLE_MAX = 30;
-  char m_id[TAILLE_MAX];
+  static const int TAILLE_MAX = 10;
+  char m_id[TAILLE_MAX];  // tableau de caractères
   int m_x;
   int m_y;
   int m_cap;
@@ -20,7 +19,7 @@ class EnvoiBalise
   EnvoiBalise (const std::string & id, int x, int y, int cap);
 
   // accesseurs
-  string   id()     const;
+  std::string   id()  const   ;
   int  x() const;
   int  y() const;
   int  cap() const;

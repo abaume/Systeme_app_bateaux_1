@@ -6,8 +6,8 @@ CONFIG -= qt
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
 
 SOURCES += main.cpp \
-    EnvoiBalise.cpp \
-    make-sockaddr.cc
+    make-sockaddr.cc \
+    EnvoiBalise.cpp
 
 HEADERS += \
     EnvoiBalise.h \

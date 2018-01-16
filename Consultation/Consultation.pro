@@ -6,7 +6,7 @@ CONFIG -= qt
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
 SOURCES += main.cpp \
     make-sockaddr.cc \
-    EnvoiBalise.cc
+    EnvoiBalise.cpp
 
 include(deployment.pri)
 qtcAddDeployment()

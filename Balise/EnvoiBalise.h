@@ -19,7 +19,7 @@ class EnvoiBalise
   EnvoiBalise (const std::string & id, int x, int y, int cap);
 
   // accesseurs
-  std::string   id()     ;
+  std::string   id()  const   ;
   int  x() const;
   int  y() const;
   int  cap() const;
